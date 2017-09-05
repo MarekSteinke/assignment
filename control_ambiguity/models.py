@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     endowment = c(10)
-    number_remove_low= 1
+    number_remove_low = 1
     number_remove_high = 5
 
 
@@ -25,6 +25,7 @@ class Subsession(BaseSubsession):
 
      def before_session_starts(self):
         self.replacement_decision()
+        #self.replacement_price_decission()
 
      def replacement_decision(self):
          for player in self.get_players():
@@ -33,7 +34,7 @@ class Subsession(BaseSubsession):
      def replacement_price_decission(self):
      	 self.replacement_price = random.randint(0, 10)
 
-     replacement_price = models.FloatField()
+     replacement_price = models.CurrencyField()
 
 
 class Group(BaseGroup):
@@ -51,3 +52,11 @@ class Player(BasePlayer):
     	verbose_name="Which price would you pay to remove the balls?",
     	doc="player_wtp_to_remove_balls"
     	)
+
+    modification = models.IntegerField()
+
+    def modification_decision(self):
+    	if self.wtp_remove >= 4:
+    		self.modification = 1
+    	else:
+    		self.modification = 2
