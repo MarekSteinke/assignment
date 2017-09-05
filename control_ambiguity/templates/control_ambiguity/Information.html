@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Information about replacement
+{% endblock %}
+
+{% block content %}
+The price for the replacement is {{ subsession.replacement_price }}€. You wanted to pay a price up to {{ player.wtp_remove}}€.
+
+
+    {% next_button %}
+
+{% endblock %}

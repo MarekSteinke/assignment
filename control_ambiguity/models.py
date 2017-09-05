@@ -30,6 +30,11 @@ class Subsession(BaseSubsession):
          for player in self.get_players():
             player.number_remove = random.choice([Constants.number_remove_low, Constants.number_remove_high])
 
+     def replacement_price_decission(self):
+     	 self.replacement_price = random.randint(0, 10)
+
+     replacement_price = models.FloatField()
+
 
 class Group(BaseGroup):
     pass
