@@ -37,3 +37,12 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     number_remove = models.CharField()
+    
+    wtp_remove = models.CurrencyField(
+    	min=0,
+    	max=10,
+    	#choices=currency_range(c(0.00), c(10.00), c(0.1)),
+    	widget=widgets.SliderInput(attrs={'step': '0.1'}),
+    	verbose_name="Which price would you pay to remove ??? balls?",
+    	doc="player_wtp_to_remove_balls"
+    	)

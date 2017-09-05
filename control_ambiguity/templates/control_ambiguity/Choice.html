@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Youre Choice
+{% endblock %}
+
+{% block content %}
+{% formfield player.wtp_remove %}
+
+
+    {% next_button %}
+
+{% endblock %}
