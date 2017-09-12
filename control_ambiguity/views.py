@@ -33,7 +33,12 @@ class Results(Page):
     pass
 
 
-class Domographics(Page):
+class Demographics(Page):
+    form_model = models.Player
+    form_fields = ["age", "gender"]
+
+
+class EndPage(Page):
     pass
 
 
@@ -43,5 +48,6 @@ page_sequence = [
     ResultsWaitPage,
     Information,
     Results,
-    Demographics
+    Demographics,
+    EndPage
 ]

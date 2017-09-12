@@ -48,7 +48,7 @@ class Player(BasePlayer):
     	#alternative code: choices=currency_range(c(0.00), c(10.00), c(0.1)),
     	widget=widgets.SliderInput(attrs={'step': '0.1'}),
     	verbose_name="Which price would you pay to remove the balls?",
-    	doc="player_wtp_to_remove_balls"
+    	doc="player's wtp to remove the balls"
     	)
 
     replacement_price = models.CurrencyField()
@@ -65,4 +65,14 @@ class Player(BasePlayer):
         else:
             self.modification = "did not"
 
-    
+    gender = models.CharField(
+        choices=["female", "male", "other"],
+        widget=widgets.RadioSelectHorizontal(),
+        verbose_name="What is your gender?",
+        doc="participant's gender"
+        )
+
+    age = models.PositiveIntegerField(
+    	verbose_name="How old are you?",
+    	doc="participant's gender"
+    )
