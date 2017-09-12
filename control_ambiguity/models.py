@@ -19,22 +19,20 @@ class Constants(BaseConstants):
     endowment = c(10)
     number_remove_low = 1
     number_remove_high = 5
+    #Use next line for choosing one treatment
+    #number_remove = ???
 
 
 class Subsession(BaseSubsession):
 
      def before_session_starts(self):
         self.replacement_decision()
-        #self.replacement_price_decission()
+        #Remove this, if you already chose a treatment
+        ###self.replacement_price_decission()
 
      def replacement_decision(self):
          for player in self.get_players():
             player.number_remove = random.choice([Constants.number_remove_low, Constants.number_remove_high])
-
-     def replacement_price_decission(self):
-     	 self.replacement_price = random.randint(0, 10)
-
-     replacement_price = models.CurrencyField()
 
 
 class Group(BaseGroup):
@@ -53,10 +51,18 @@ class Player(BasePlayer):
     	doc="player_wtp_to_remove_balls"
     	)
 
-    modification = models.IntegerField()
+    replacement_price = models.CurrencyField()
+
+    def replacement_price_decission(self):
+        self.replacement_price = random.randint(0, 10)
+
+
+    modification = models.CharField()
 
     def modification_decision(self):
-    	if self.wtp_remove >= 4:
-    		self.modification = 1
-    	else:
-    		self.modification = 2
+        if self.wtp_remove >= self.replacement_price:
+            self.modification = "did"
+        else:
+            self.modification = "did not"
+
+    

@@ -6,7 +6,7 @@ from .models import Constants
 
 class Introduction(Page):
     def before_next_page(self):
-        self.subsession.replacement_price_decission()
+        self.player.replacement_price_decission()
 
 
 class Choice(Page):
@@ -14,7 +14,6 @@ class Choice(Page):
     form_model = models.Player
     form_fields = ["wtp_remove"]
     def before_next_page(self):
-        self.subsession.replacement_price_decission()
         self.player.modification_decision()
     
     
@@ -23,8 +22,6 @@ class Choice(Page):
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        #self.subsession.replacement_price_decission()
-        #self.player.modification_decision()
         pass
 
 
@@ -36,10 +33,15 @@ class Results(Page):
     pass
 
 
+class Domographics(Page):
+    pass
+
+
 page_sequence = [
     Introduction,
     Choice,
     ResultsWaitPage,
     Information,
-    Results
+    Results,
+    Demographics
 ]
