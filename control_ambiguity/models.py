@@ -24,15 +24,14 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
+    def before_session_starts(self):
+        for player in self.get_players():
+            if 'treatment' in self.session.config:
+                player.treatment = self.session.config['treatment']
+            else:
+                player.treatment = random.choice(['high', 'low'])
+            player.number_remove = Constants.number_remove_high if player.treatment == 'high' else Constants.number_remove_low
 
-     def before_session_starts(self):
-        self.replacement_decision()
-        #Remove this, if you already chose a treatment
-        ###self.replacement_price_decission()
-
-     def replacement_decision(self):
-         for player in self.get_players():
-            player.number_remove = random.choice([Constants.number_remove_low, Constants.number_remove_high])
 
 
 class Group(BaseGroup):
@@ -76,3 +75,13 @@ class Player(BasePlayer):
     	verbose_name="How old are you?",
     	doc="participant's gender"
     )
+
+    #def calculate_payoff(self):
+    	#if self.modification == "did" and self.ball == "green":
+    		#self.payoff = Constants.endowment - self.replacement_price + 10
+    	#elif self.modification == "did" and self.ball == "red":
+    		#self.payoff = Constants.endowment - self.replacement_price
+    	#elif self.modification == "did not" and self.ball == "green":
+    		#self.payoff = Constants.endowment + 10
+    	#else:
+    		#self.payoff = Constants.endowment
