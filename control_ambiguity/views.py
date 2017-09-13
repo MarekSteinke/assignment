@@ -35,7 +35,7 @@ class Results(Page):
 
 class Demographics(Page):
     form_model = models.Player
-    form_fields = ["age", "gender"]
+    form_fields = ["age", "gender", "risk", "country"]
 
 
 class EndPage(Page):

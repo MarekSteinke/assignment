@@ -3,6 +3,8 @@ from otree.api import (
     Currency as c, currency_range
 )
 
+from django_countries.fields import CountryField
+
 import random
 
 author = 'Your name here'
@@ -19,8 +21,7 @@ class Constants(BaseConstants):
     endowment = c(10)
     number_remove_low = 1
     number_remove_high = 5
-    #Use next line for choosing one treatment
-    #number_remove = ???
+    # For choosing one treatment, go to the settings file and replace in the session configs the #-sign in front of 'treatment' and either choose 'high' or 'low'
 
 
 class Subsession(BaseSubsession):
@@ -72,9 +73,20 @@ class Player(BasePlayer):
         )
 
     age = models.PositiveIntegerField(
-    	verbose_name="How old are you?",
-    	doc="participant's gender"
-    )
+        verbose_name="How old are you?",
+        doc="participant's gender"
+        )
+
+    risk = models.IntegerField(
+    	min=1,
+    	max=7,
+    	verbose_name="Please choose on a scale from 1 to 7 how likely you are to take risk (1 means extreamly unlikely and 7 means extreamly likely).",
+    	doc="participant's willingness to take risk"
+    	)
+
+    country = CountryField(
+    	verbose_name="Please choose your country of birth"
+    	)
 
     #def calculate_payoff(self):
     	#if self.modification == "did" and self.ball == "green":
