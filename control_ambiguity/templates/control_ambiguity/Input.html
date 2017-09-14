@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Experimenter Input Page
+{% endblock %}
+
+{% block content %}
+
+AHello Experimenter! <br>
+Please take one ball from each urn and tell oTree its color. Thanks.
+
+{% formfield group.no_modification_ball %}
+{% formfield group.one_modified_ball %}
+{% formfield group.five_modified_balls %}
+
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/1.8/ref/templates/language/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+
+    {% next_button %}
+
+{% endblock %}

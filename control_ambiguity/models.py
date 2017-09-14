@@ -16,7 +16,8 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'CA'
-    players_per_group = None
+    #enter the number of participants in players_per_group. Make sure that you open one link before all the participants!
+    players_per_group = 3
     num_rounds = 1
     endowment = c(10)
     number_remove_low = 1
@@ -36,7 +37,24 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+    
+    no_modification_ball = models.CharField(
+    	choices=["green", "red"],
+    	verbose_name="Color of ball from unmodified urn",
+    	doc="Color of ball from unmodified urn"
+    	)
+
+    one_modified_ball = models.CharField(
+    	choices=["green", "red"],
+    	verbose_name="Color of ball from urn with one ball replaced",
+    	doc="Color of ball from urn with one ball replaced"
+    	)
+
+    five_modified_balls = models.CharField(
+    	choices=["green", "red"],
+    	verbose_name="Color of ball from urn with five balls replaced",
+    	doc="Color of ball from urn with five balls replaced"
+    	)
 
 
 class Player(BasePlayer):

@@ -29,8 +29,21 @@ class Information(Page):
     pass
 
 
+class Input(Page):
+    def is_displayed(self):
+        return self.player.id_in_group == 1
+    form_model = models.Group
+    form_fields = ["no_modification_ball", "one_modified_ball", "five_modified_balls"]
+
+
+class WaitForInput(WaitPage):
+    def after_all_players_arrive(self):
+        pass
+
+
 class Results(Page):
     pass
+
 
 
 class Demographics(Page):
@@ -47,6 +60,8 @@ page_sequence = [
     Choice,
     ResultsWaitPage,
     Information,
+    Input,
+    WaitForInput,
     Results,
     Demographics,
     EndPage
