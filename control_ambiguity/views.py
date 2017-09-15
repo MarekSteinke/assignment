@@ -36,13 +36,18 @@ class Input(Page):
     form_fields = ["no_modification_ball", "one_modified_ball", "five_modified_balls"]
 
 
+
 class WaitForInput(WaitPage):
     def after_all_players_arrive(self):
-        pass
+        #pass
+        self.group.calculate_payoff()
 
 
 class Results(Page):
-    pass
+    def before_next_page(self):
+        pass
+        #self.player.choose_ball()
+        #self.group.calculate_payoff()
 
 
 

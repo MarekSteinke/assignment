@@ -57,6 +57,31 @@ class Group(BaseGroup):
     	)
 
 
+    def calculate_payoff(self):
+    	for Player in self.get_players():
+    		if Player.modification == "did" and Player.number_remove == "1" and self.one_modified_ball == "green":
+    		    Player.ball = "green"
+    		elif Player.modification == "did" and Player.number_remove == "1" and self.one_modified_ball == "red":
+    		    Player.ball = "red"
+    		elif Player.modification == "did" and Player.number_remove == "5" and self.five_modified_balls == "green":
+    		    Player.ball = "green"
+    		elif Player.modification == "did" and Player.number_remove == "5" and self.five_modified_balls == "red":
+    		    Player.ball = "red"
+    		elif Player.modification == "did not" and self.no_modification_ball == "green":
+    		    Player.ball = "green"
+    		else:
+    		    Player.ball = "red"
+
+    		if Player.modification == "did" and Player.ball == "green":
+    			Player.payoff = Constants.endowment - Player.replacement_price + 10
+    		elif Player.modification == "did" and Player.ball == "red":
+    			Player.payoff = Constants.endowment - Player.replacement_price
+    		elif Player.modification == "did not" and Player.ball == "green":
+    			Player.payoff = Constants.endowment + 10
+    		else:
+    			Player.payoff = Constants.endowment
+
+
 class Player(BasePlayer):
     number_remove = models.CharField()
 
@@ -106,12 +131,29 @@ class Player(BasePlayer):
     	verbose_name="Please choose your country of birth"
     	)
 
-    #def calculate_payoff(self):
-    	#if self.modification == "did" and self.ball == "green":
-    		#self.payoff = Constants.endowment - self.replacement_price + 10
-    	#elif self.modification == "did" and self.ball == "red":
-    		#self.payoff = Constants.endowment - self.replacement_price
-    	#elif self.modification == "did not" and self.ball == "green":
-    		#self.payoff = Constants.endowment + 10
-    	#else:
-    		#self.payoff = Constants.endowment
+    ball = models.CharField()
+
+    def choose_ball(self):
+    	if self.modification == "did" and self.number_remove == "1" and Group.one_modified_ball == "green":
+    	    self.ball = "green"
+    	elif self.modification == "did" and self.number_remove == "1" and Group.one_modified_ball == "red":
+    	    self.ball = "red"
+    	elif self.modification == "did" and self.number_remove == "5" and Group.five_modified_balls == "green":
+    	    self.ball = "green"
+    	elif self.modification == "did" and self.number_remove == "5" and Group.five_modified_balls == "red":
+    	    self.ball = "red"
+    	elif self.modification == "did not" and Group.no_modification_ball == "green":
+    	    self.ball = "green"
+    	else:
+    	    self.ball = "red"
+
+    	
+    def calculate_payoff(self):
+    	if self.modification == "did" and self.ball == "green":
+    		self.payoff = Constants.endowment - self.replacement_price + 10
+    	elif self.modification == "did" and self.ball == "red":
+    		self.payoff = Constants.endowment - self.replacement_price
+    	elif self.modification == "did not" and self.ball == "green":
+    		self.payoff = Constants.endowment + 10
+    	else:
+    		self.payoff = Constants.endowment
