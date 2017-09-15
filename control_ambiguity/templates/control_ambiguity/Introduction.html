@@ -7,8 +7,8 @@
 
 {% block content %}
 Welcome to todays experiment and thank you for participating. <br> <br>
-At the beginning of the experiment you have an endowment of {{ Constants.endowment }}. There is an urn containing 10 balls, either red or green, from which one ball will be drawn. If the drawn ball is red, you will receive €0, if it is green you will receive additional €10. The distribution of red and green balls is not known, but you have the possibility to replace {{ player.number_remove }} balls randomly drawn with green balls. <br>
-When you click the next button, you will be asked first, about how many green balls you think the urn contains and second, how much of your {{ Constants.endowment }} you would spend to let the replacement take place. If this number is greater than some randomly chosen price (between €0 and €10) the replacement takes place, if it is smaller, the urn stays unmodified. You will be informed about this result. <br>
+At the beginning of the experiment you have an endowment of {{ Constants.endowment }}. There is an urn containing 10 balls, either red or green, from which one ball will be drawn. If the drawn ball is red, you will receive €0, if it is green you will receive additional €10. The distribution of red and green balls is not known, but you have the possibility to replace {{ player.number_remove }} balls randomly drawn from the urn with green balls. <br>
+When you click the next button, you will be asked first, about how many green balls you think the urn contains, and second, how much of your {{ Constants.endowment }} you would spend to let the replacement take place. If this number is greater than some randomly chosen price (between €0 and €10) the replacement takes place and you pay the randomly chosen price. If it is smaller, the urn stays unmodified. You will be informed about this result. <br>
 After the replacement has or has not taken place, one ball will be drawn and you will be informed about whether you won or lost. <br>
 At the end of the experiment you will be asked some questions about your demographics.
 

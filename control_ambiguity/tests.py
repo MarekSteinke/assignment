@@ -2,12 +2,14 @@ from otree.api import Currency as c, currency_range
 from . import views
 from ._builtin import Bot
 from .models import Constants
+from otree.api import SubmissionMustFail
 
 
 class PlayerBot(Bot):
 
     def play_round(self):
         yield(views.Introduction)
+        yield SubmissionMustFail(views.Choice, {'wtp_remove': 15, 'expected_green_balls': 15})
         yield (views.Choice, {'wtp_remove': 5, 'expected_green_balls': 5})
         yield(views.Information)
         if self.player.id_in_group == 1:
@@ -15,4 +17,5 @@ class PlayerBot(Bot):
         else:
         	pass
         yield(views.Results)
+        yield SubmissionMustFail(views.Demographics, {'age': -3, 'gender': "male", 'risk': 8, 'country': "AT"})
         yield(views.Demographics, {'age': 55, 'gender': "male", 'risk': 4, 'country': "AT"})

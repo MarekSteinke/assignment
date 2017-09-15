@@ -97,8 +97,8 @@ class Player(BasePlayer):
     	max=10,
     	#alternative code: choices=currency_range(c(0.00), c(10.00), c(0.1)),
     	widget=widgets.SliderInput(attrs={'step': '0.1'}),
-    	verbose_name="Which price would you pay to remove the balls?",
-    	doc="player's wtp to remove the balls"
+    	verbose_name="Which price would you pay to replace the balls?",
+    	doc="player's wtp to replace the balls"
     	)
 
     replacement_price = models.CurrencyField()
