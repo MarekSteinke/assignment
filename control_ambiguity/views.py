@@ -12,7 +12,7 @@ class Introduction(Page):
 class Choice(Page):
     
     form_model = models.Player
-    form_fields = ["wtp_remove"]
+    form_fields = ["wtp_remove", "expected_green_balls"]
     def before_next_page(self):
         self.player.modification_decision()
     
@@ -39,16 +39,12 @@ class Input(Page):
 
 class WaitForInput(WaitPage):
     def after_all_players_arrive(self):
-        #pass
         self.group.calculate_payoff()
 
 
 class Results(Page):
-    def before_next_page(self):
         pass
-        #self.player.choose_ball()
-        #self.group.calculate_payoff()
-
+        
 
 
 class Demographics(Page):

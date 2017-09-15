@@ -83,6 +83,13 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    expected_green_balls = models.PositiveIntegerField(
+    	min=0,
+    	max=10,
+    	verbose_name="How many green balls do you think are in the urn?",
+    	doc="participant's expectation of amount of green balls"
+    	)
+
     number_remove = models.CharField()
 
     wtp_remove = models.CurrencyField(
@@ -132,28 +139,3 @@ class Player(BasePlayer):
     	)
 
     ball = models.CharField()
-
-    def choose_ball(self):
-    	if self.modification == "did" and self.number_remove == "1" and Group.one_modified_ball == "green":
-    	    self.ball = "green"
-    	elif self.modification == "did" and self.number_remove == "1" and Group.one_modified_ball == "red":
-    	    self.ball = "red"
-    	elif self.modification == "did" and self.number_remove == "5" and Group.five_modified_balls == "green":
-    	    self.ball = "green"
-    	elif self.modification == "did" and self.number_remove == "5" and Group.five_modified_balls == "red":
-    	    self.ball = "red"
-    	elif self.modification == "did not" and Group.no_modification_ball == "green":
-    	    self.ball = "green"
-    	else:
-    	    self.ball = "red"
-
-    	
-    def calculate_payoff(self):
-    	if self.modification == "did" and self.ball == "green":
-    		self.payoff = Constants.endowment - self.replacement_price + 10
-    	elif self.modification == "did" and self.ball == "red":
-    		self.payoff = Constants.endowment - self.replacement_price
-    	elif self.modification == "did not" and self.ball == "green":
-    		self.payoff = Constants.endowment + 10
-    	else:
-    		self.payoff = Constants.endowment
