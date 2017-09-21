@@ -49,7 +49,12 @@ class Results(Page):
 
 class Demographics(Page):
     form_model = models.Player
-    form_fields = ["age", "gender", "risk", "country"]
+    form_fields = ["age", "gender", "risk", "country", "field_of_study", "no_student"]
+
+    def error_message(self, answer):
+        if answer["no_student"] == "Non-student" and answer["field_of_study"] != None:
+            return "Please don't fill in a field of study if you are a non-student"
+        
 
 
 class EndPage(Page):

@@ -17,7 +17,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'CA'
     #enter the number of participants in players_per_group. Make sure that you open one link before all the participants!
-    players_per_group = 3
+    players_per_group = 2
     num_rounds = 1
     endowment = c(10)
     number_remove_low = 1
@@ -136,6 +136,17 @@ class Player(BasePlayer):
 
     country = CountryField(
     	verbose_name="Please choose your country of birth"
+    	)
+
+    field_of_study = models.CharField(
+    	verbose_name="Which, if any, subject do you study?",
+    	blank=True
+    	)
+
+    no_student = models.CharField(
+    	choices=["Non-student"],
+    	widget=widgets.RadioSelectHorizontal(),
+    	blank=True
     	)
 
     ball = models.CharField()
