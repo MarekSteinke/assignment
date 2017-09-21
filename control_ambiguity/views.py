@@ -4,6 +4,16 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class PasswordPage(Page):
+    def is_displayed(self):
+        return self.player.id_in_group == 1
+    form_model = models.Player
+    form_fields = ["password"]
+
+    def error_message(self, input):
+       if input["password"] != "spamspam":
+           return "Please enter the correct password; if you are not the experimenter, tell the experimenter, that you can see this page!"
+
 class Introduction(Page):
     def before_next_page(self):
         self.player.replacement_price_decission()
@@ -54,7 +64,7 @@ class Demographics(Page):
     def error_message(self, answer):
         if answer["no_student"] == "Non-student" and answer["field_of_study"] != None:
             return "Please don't fill in a field of study if you are a non-student"
-        
+
 
 
 class EndPage(Page):
@@ -62,6 +72,7 @@ class EndPage(Page):
 
 
 page_sequence = [
+    PasswordPage,
     Introduction,
     Choice,
     ResultsWaitPage,

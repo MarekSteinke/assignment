@@ -150,3 +150,7 @@ class Player(BasePlayer):
     	)
 
     ball = models.CharField()
+
+    password = models.CharField(
+    	verbose_name="Please enter the password to continue"
+    	)

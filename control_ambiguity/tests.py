@@ -8,6 +8,11 @@ from otree.api import SubmissionMustFail
 class PlayerBot(Bot):
 
     def play_round(self):
+        if self.player.id_in_group ==1:
+        	yield SubmissionMustFail (views.PasswordPage, {'password': "tüdelü"})
+        	yield (views.PasswordPage, {'password': "spamspam"})
+        else:
+        	pass
         yield(views.Introduction)
         yield SubmissionMustFail(views.Choice, {'wtp_remove': 15, 'expected_green_balls': 15})
         yield (views.Choice, {'wtp_remove': 5, 'expected_green_balls': 5})
