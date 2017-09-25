@@ -95,9 +95,8 @@ class Player(BasePlayer):
     wtp_remove = models.CurrencyField(
     	min=0,
     	max=10,
-    	#alternative code: choices=currency_range(c(0.00), c(10.00), c(0.1)),
     	widget=widgets.SliderInput(attrs={'step': '0.1'}),
-    	verbose_name="Which price would you pay to replace the balls?",
+    	verbose_name="Which price would you pay to let the modification take place?",
     	doc="player's wtp to replace the balls"
     	)
 
@@ -140,13 +139,16 @@ class Player(BasePlayer):
 
     field_of_study = models.CharField(
     	verbose_name="Which, if any, subject do you study?",
-    	blank=True
+    	blank=True,
+    	doc="participant's field of study"
     	)
 
     no_student = models.CharField(
     	choices=["Non-student"],
     	widget=widgets.RadioSelectHorizontal(),
-    	blank=True
+    	blank=True,
+    	verbose_name="",
+    	doc="participant is non-student"
     	)
 
     ball = models.CharField()

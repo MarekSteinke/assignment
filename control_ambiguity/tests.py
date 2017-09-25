@@ -24,4 +24,4 @@ class PlayerBot(Bot):
         yield(views.Results)
         yield SubmissionMustFail(views.Demographics, {'age': -3, 'gender': "male", 'risk': 8, 'country': "AT"})
         yield SubmissionMustFail(views.Demographics, {'age': 55, 'gender': "male", 'risk': 4, 'country': "AT", 'no_student': "Non-student", 'field_of_study': "spam"})
-        yield(views.Demographics, {'age': 55, 'gender': "male", 'risk': 4, 'country': "AT"})
+        yield(views.Demographics, {'age': 55, 'gender': "male", 'risk': 4, 'country': "AT", 'no_student': "Non-student", 'field_of_study': ""})
