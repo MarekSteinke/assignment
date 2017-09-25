@@ -116,7 +116,7 @@ SESSION_CONFIGS = [
          'display_name': 'control Ambiguity',
          'num_demo_participants': 2,
          'app_sequence': ['control_ambiguity'],
-         #'treatment' : 'high'
+         #'treatment' : 'low'
 
     }
 ]

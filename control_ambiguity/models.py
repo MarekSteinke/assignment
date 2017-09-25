@@ -9,10 +9,10 @@ from django import forms
 
 import random
 
-author = 'Your name here'
+author = 'Marek'
 
 doc = """
-Your app description
+Control Ambiguity
 """
 
 
@@ -22,6 +22,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 1
     endowment = c(10)
+    ball_colors = ["green", "red"]
     number_remove_low = 1
     number_remove_high = 5
     # For choosing one treatment, go to the settings file and replace in the session configs the #-sign in front of 'treatment' and either choose 'high' or 'low'
@@ -41,19 +42,19 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     
     no_modification_ball = models.CharField(
-    	choices=["green", "red"],
+    	choices=Constants.ball_colors,
     	verbose_name="Color of ball from unmodified urn",
     	doc="Color of ball from unmodified urn"
     	)
 
     one_modified_ball = models.CharField(
-    	choices=["green", "red"],
+    	choices=Constants.ball_colors,
     	verbose_name="Color of ball from urn with one ball replaced",
     	doc="Color of ball from urn with one ball replaced"
     	)
 
     five_modified_balls = models.CharField(
-    	choices=["green", "red"],
+    	choices=Constants.ball_colors,
     	verbose_name="Color of ball from urn with five balls replaced",
     	doc="Color of ball from urn with five balls replaced"
     	)
@@ -92,7 +93,9 @@ class Player(BasePlayer):
     	doc="participant's expectation of amount of green balls"
     	)
 
-    number_remove = models.CharField()
+    number_remove = models.CharField(
+    	doc="number of balls participant can replace"
+    	)
 
     wtp_remove = models.CurrencyField(
     	min=0,
@@ -102,13 +105,17 @@ class Player(BasePlayer):
     	doc="player's wtp to replace the balls"
     	)
 
-    replacement_price = models.CurrencyField()
+    replacement_price = models.CurrencyField(
+    	doc="price participant has to pay for modification"
+    	)
 
     def replacement_price_decission(self):
         self.replacement_price = random.randint(0, 10)
 
 
-    modification = models.CharField()
+    modification = models.CharField(
+    	doc="shows if modification did or did not take place"
+    	)
 
     def modification_decision(self):
         if self.wtp_remove >= self.replacement_price:
@@ -124,6 +131,7 @@ class Player(BasePlayer):
         )
 
     age = models.PositiveIntegerField(
+    	max=150,
         verbose_name="How old are you?",
         doc="participant's gender"
         )
@@ -146,16 +154,16 @@ class Player(BasePlayer):
     	)
 
     no_student = models.CharField(
-    	#choices=["Non-student"],
-    	#widget=widgets.RadioSelectHorizontal(),
     	widget=forms.CheckboxInput,
     	blank=True,
     	verbose_name="Non-student",
-    	doc="participant is non-student"
+    	doc="true if participant is non-student"
     	)
 
-    ball = models.CharField()
+    ball = models.CharField(
+    	doc="color of ball from the urn that is important for participant"
+    	)
 
     password = models.CharField(
-    	verbose_name="Please enter the password to continue"
+    	verbose_name="Please enter the password to continue",
     	)
