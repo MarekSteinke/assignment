@@ -5,6 +5,8 @@ from otree.api import (
 
 from django_countries.fields import CountryField
 
+from django import forms
+
 import random
 
 author = 'Your name here'
@@ -144,10 +146,11 @@ class Player(BasePlayer):
     	)
 
     no_student = models.CharField(
-    	choices=["Non-student"],
-    	widget=widgets.RadioSelectHorizontal(),
+    	#choices=["Non-student"],
+    	#widget=widgets.RadioSelectHorizontal(),
+    	widget=forms.CheckboxInput,
     	blank=True,
-    	verbose_name="",
+    	verbose_name="Non-student",
     	doc="participant is non-student"
     	)
 

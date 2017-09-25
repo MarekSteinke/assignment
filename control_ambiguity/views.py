@@ -62,9 +62,9 @@ class Demographics(Page):
     form_fields = ["age", "gender", "risk", "country", "field_of_study", "no_student"]
 
     def error_message(self, answer):
-        if answer["no_student"] == "Non-student" and answer["field_of_study"] != "":
+        if answer["no_student"] == 'True' and answer["field_of_study"] != "":
             return "Please don't fill in a field of study if you are a non-student."
-        elif answer["no_student"] != "Non-student" and answer["field_of_study"] == "":
+        elif answer["no_student"] == 'False' and answer["field_of_study"] == "":
             return "Please fill in a field of study if you are a student."
 
 
